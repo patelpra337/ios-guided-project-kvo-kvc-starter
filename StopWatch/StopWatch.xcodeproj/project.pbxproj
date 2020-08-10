@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8721CE5D24DCFFB900B8C2A2 /* LSITipController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSITipController.m; sourceTree = "<group>"; };
 		BDAD046D237B13F1005C1360 /* StopWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StopWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAD0470237B13F1005C1360 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BDAD0471237B13F1005C1360 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -70,6 +71,7 @@
 				BDAD0474237B13F1005C1360 /* SceneDelegate.m */,
 				BDAD0476237B13F1005C1360 /* ViewController.h */,
 				BDAD048E237B14AC005C1360 /* ViewController.m */,
+				8721CE5D24DCFFB900B8C2A2 /* LSITipController.m */,
 				BDAD0489237B1409005C1360 /* LSIStopWatch.h */,
 				BDAD048A237B1409005C1360 /* LSIStopWatch.m */,
 				BDAD048B237B1409005C1360 /* Main.storyboard */,

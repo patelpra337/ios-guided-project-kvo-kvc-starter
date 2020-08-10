@@ -53,7 +53,11 @@
 	// If you pause/start the timer it will keep track of the original
 	// time so it doesn't start from 0 each time
 	
-    self.elapsedTime = [[NSDate date] timeIntervalSinceDate:self.startDate] + self.previouslyAccumulatedTime;
+//    [self willChangeValueForKey:@"anotherProperty"];
+    [self willChangeValueForKey:@"elapsedTime"];
+    _elapsedTime = [[NSDate date] timeIntervalSinceDate:self.startDate] + self.previouslyAccumulatedTime;
+    [self didChangeValueForKey:@"elapsedTime"];
+//    [self didChangeValueForKey:@"anotherProperty"];
 }
 
 

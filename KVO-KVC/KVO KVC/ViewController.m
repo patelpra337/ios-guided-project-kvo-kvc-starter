@@ -26,7 +26,7 @@
 
     LSIDepartment *marketing = [[LSIDepartment alloc] init];
     marketing.name = @"Marketing";
-    LSIEmployee * philSchiller = [[LSIEmployee alloc] init];
+    LSIEmployee *philSchiller = [[LSIEmployee alloc] init];
     philSchiller.name = @"Phil";
     philSchiller.jobTitle = @"VP of Marketing";
     philSchiller.salary = 10000000; 
@@ -65,9 +65,56 @@
     [controller addDepartment:marketing];
     self.hrController = controller;
     
+//    NSString *key = @"privateName";
+//
+//    [craig setValue:@"Hair Force One" forKey:key];
+//
+//    NSString *value = [craig valueForKey:key]; // Can't use craig.privateName
+//    NSLog(@"value for key `%@`: %@", key, value);
+//
+//    value = [philSchiller valueForKey:key];
+//    NSLog(@"before: %@: %@", key, value);
+//    [philSchiller setValue:@"Apple Fellow" forKey:key];
+//    value = [philSchiller valueForKey:key];
+//    NSLog(@"after: %@: %@", key, value);
+    
+//    NSString *keyPath = @"manager.name";
+//    NSString *value = [marketing valueForKeyPath:keyPath];
+//    NSLog(@"Manager's name: %@", value);
+    
+    [marketing addEmployee:craig];
+    
     NSLog(@"%@", self.hrController);
     
+    NSString *keyPath = @"departments.@distinctUnionOfArrays.employees";
+    NSArray *allEmployees = [self.hrController valueForKeyPath:keyPath];
+    NSLog(@"Employee names: %@", allEmployees);
     
+    [marketing setValue:@(75000) forKeyPath:@"manager.salary"];
+    
+    NSLog(@"Average Salary: %@", [allEmployees valueForKeyPath:@"@avg.salary"]);
+    NSLog(@"Max Salary: %@", [allEmployees valueForKeyPath:@"@max.salary"]);
+    NSLog(@"Min Salary: %@", [allEmployees valueForKeyPath:@"@min.salary"]);
+    NSLog(@"Number of Salaries: %@", [allEmployees valueForKeyPath:@"@count.salary"]);
+    
+    @try {
+        NSArray *directSalaries = [self valueForKeyPath:@"hrController.departments.@unionOfArrays.employees.salary"];
+        NSLog(@"Direct Salaries: %@", directSalaries);
+    } @catch (NSException *exception) {
+        NSLog(@"Got an exception: %@", exception);
+    }
+    
+    NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSSortDescriptor *salarySortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"salary" ascending:NO];
+    
+    [marketing setValue:@"Joe" forKeyPath:@"manager.name"];
+    
+    NSArray *sortedEmployees = [allEmployees sortedArrayUsingDescriptors:@[nameSortDescriptor, salarySortDescriptor]];
+    NSLog(@"Sorted: %@", sortedEmployees);
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", @"Joe"];
+    NSArray *filteredEmployees = [allEmployees filteredArrayUsingPredicate:predicate];
+    NSLog(@"Filtered: %@", filteredEmployees);
 }
 
 
